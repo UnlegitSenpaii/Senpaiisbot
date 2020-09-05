@@ -1,19 +1,16 @@
-const commando = require('discord.js-commando');
-const discord = require('discord.js');
-const client = require('nekos.life');
+const commando = require("discord.js-commando");
+const discord = require("discord.js");
+const client = require("nekos.life");
 const neko = new client();
-
-
 
 class cuddleCommand extends commando.Command {
     constructor(client) {
-        super(client,
-            {
-                name: 'cuddle',
-                group: 'interactions',
-                memberName: 'cuddle',
-                description: 'cuddle other users.'
-            })
+        super(client, {
+            name: "cuddle",
+            group: "interactions",
+            memberName: "cuddle",
+            description: "cuddle other users.",
+        });
     }
 
     async run(message, args) {
@@ -24,22 +21,25 @@ class cuddleCommand extends commando.Command {
         }
         var cuddle = await neko.sfw.cuddle();
         console.log(cuddle);
-        if (message.author == target) {
+        if (message.author == target.user) {
             var selfcuddle = new discord.RichEmbed()
-                .addField(message.author + " cuddles himself", ":3", true)
+                .addField(message.author.username + " cuddles himself", ":3", true)
                 .setColor("#FF69B4")
                 .setImage(cuddle.url)
-                .setFooter("powered by nekos.life <3")
+                .setFooter("powered by nekos.life <3");
             message.channel.sendEmbed(selfcuddle);
             return;
         }
         var ws = new discord.RichEmbed()
-            .addField(" cuddles ", ":3", true)
+            .addField(
+                message.author.username + " cuddles " + target.user.username,
+                ":3",
+                true
+            )
             .setColor("#FF69B4")
             .setImage(cuddle.url)
-            .setFooter("powered by nekos.life <3")
-        message.channel.send(message.author + " cuddles " + target);
-        message.channel.sendEmbed(ws);
+            .setFooter("powered by nekos.life <3");
+        message.channel.send(ws);
     }
 }
 

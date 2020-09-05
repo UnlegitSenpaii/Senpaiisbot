@@ -1,12 +1,12 @@
 const cmd = require("discord.js-commando");
-
-class JoinKitsuneCommand extends cmd.Command {
+const discord = require("discord.js");
+class JoinNekoCommand extends cmd.Command {
     constructor(client) {
         super(client, {
-            name: "kitsune",
+            name: "neko",
             group: "team",
-            memberName: "kitsune",
-            description: "Be a member of the Kitsunes!",
+            memberName: "neko",
+            description: "Be a member of the Nekos! Nyaa~",
         });
     }
     async run(message, args) {
@@ -33,23 +33,21 @@ class JoinKitsuneCommand extends cmd.Command {
                 );
             return;
         }
-        let Kitsune = message.member.guild.roles.find(
-            (role) => role.name === "Kitsune"
-        );
-        if (message.member.roles.find((role) => role.name === "Neko")) {
-            message.author.send("`You are already a Neko! Nyaa~`");
+        let Neko = message.member.guild.roles.find((role) => role.name === "Neko");
+        if (message.member.roles.find((role) => role.name === "Kitsune")) {
+            message.author.send("`You are already a Kitsune! :3`");
         } else if (message.member.roles.find((role) => role.name === "muted")) {
             message.author.send("`You are currently not allowed to join any team!`");
         } else {
-            if (message.member.roles.find((role) => role.name === "Kitsune")) {
-                message.author.send("`You are already a Kitsune! :3`");
+            if (message.member.roles.find((role) => role.name === "Neko")) {
+                message.author.send("`You are already a Neko! Nyaa~`");
             } else {
-                message.member.addRole(Kitsune);
-                message.author.send("`Welcome to the Kitsunes! :3`");
-                currentKitsuneMembers.push(message.author);
+                message.member.addRole(Neko);
+                message.author.send("`Welcome to the Nekos! Nyaa~`");
+                currentNekoMembers.push(message.author);
             }
         }
     }
 }
 
-module.exports = JoinKitsuneCommand;
+module.exports = JoinNekoCommand;
